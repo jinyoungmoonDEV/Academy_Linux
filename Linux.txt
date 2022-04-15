@@ -1,0 +1,15 @@
+oracle virtual box 설치
+(용량많은 폴더에 설치 권장)
+일반,입력,언어,확장 설정
+아래 VirtualBox 6.1.32 Oracle VM VirtualBox Extension Pack 도 설치
+ubuntu linux 
+가상환경만들고 
+설정->디스플레이->VBoxVGA
+오디오사용해제
+저장소->vdboom에 iso삽입
+
+
+----------------------------------------------------------------------------
+ls = dir
+cd
+sudo dpkg -i 프로그램명 ->프로그램 다운로드
