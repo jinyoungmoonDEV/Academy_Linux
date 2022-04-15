@@ -1,0 +1,49 @@
+라우터 -> 스위치1,2,3.... or 허브
+라우터(공유기)
+스위치(지정 서버만)
+허브(모든 서버에)
+
+public IP address
+A class :   0.0.0.0 ~ 127.255.255.255
+B class : 128.0.0.0 ~ 191.255.255.255
+C class : 192.0.0.0 ~ 223.255.255.255
+D class : 224.0.0.0 ~ 239.255.255.255
+E class : 240.0.0.0 ~ 255.255.255.255
+
+A class : 0------- ********* ********** *********
+B class : 10------ -------- ********** *********
+C class : 110----- -------- --------- *********
+D class : 1110**** ******** ********** *********
+E class : 1111**** ******** ********** *********
+
+sub net mask(public IP address 효율적으로 사용할려고)
+A class : 11111111 00000000 00000000 00000000 
+B class : 11111111 11111111 00000000 00000000
+C class : 11111111 11111111 11111111 00000000
+         : 11111111 11111111 11111111 10000000
+
+gate way(다를경우 던져버리는 주소)
+
+DNS서버(서비스 서버)
+kt: 168.126.63.1
+
+NAT IP(NAT IP는 10번으로 시작 public ip로 사용x ip안보인다...),(모자란 ip 충족)
+A class :   10.xxx.xxx.xxx
+B class :  172.xxx.xxx.xxx ~ 172.31.xxx.xxx
+C class :  192.168.0.xxx ~ 192.168.255.xxx //사설ip라 접속x -> 보안이 좋다
+
+-종료
+poweroff    &     shutdown -P now   &  init 0
+halt           &     shutdown -H now
+reboot       &     shutdown -r now   & init 6
+sudo -i  (관리자 접속)
+date : 날짜 시간
+timedatectl
+
+timedatectl set-time "2022-07-07 22:43:30"
+history (명령어 기록)
+history -d 29
+!24
+!!
+!time
+history -c
