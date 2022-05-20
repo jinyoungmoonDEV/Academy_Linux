@@ -1,0 +1,291 @@
+du
+df
+-복구-
+vi /etc/fstab //#으로 전부 주석 처리
+mdadm --run /dev/md126 //디스크 실행
+mount /dev/md126 /mnt/raid1 //마운트
+df //확인
+mdadm --detail /dev/md126 //확인
+mdadm --detail --scan//전부확인
+mdadm --stop /dev/md125//실행안되는 레이드(raid 9,0) 중지처리
+//종료 -> 디스크삽입 -> 시작
+mdadm --stop /dev/md125 //126도 정지
+mdadm --create /dev/md9 --level=linear --raid-devices=2 /dev/sdb1 /dev/sdi1 /dev/sdc1
+mdadm --create /dev/md0 --level=linear --raid-devices=0 /dev/sdb1 /dev/sdi1 /dev/sdc1
+mount /dev/md9 /mnt/raidlinear //9 랑 0-> raid0마운트
+mdadm /dev/md/orange:\1 --add /dev/sdg1 //5->sdi1
+
+sudo dpkg -i google //설치
+dpkg -i galculator.deb
+dpkg -r galculator //삭제
+dpkg -P galculator //삭제
+dpkg -l //확인 or dpkg -l | grep vim
+dpkg -L vim //확인
+apt-get update //구식
+apt-get upgrade //구식
+apt-cache //구식
+apt //이걸사용 통합
+apt update
+apt upgrade
+apt list
+apt full-upgrade //새로운 버전
+apt install vim
+apt remove vim
+apt pruge vim //설정파일까지 삭제
+
+genisouimage
+-r : 8글자이상 파일이름 지정할떄
+-J : 원도우에서 64bit 유니코드 이름 허용
+-o : 출력할 파일이름
+
+-genisohistory-
+geniosimage -r -J -o my_tetst.iso /boot
+cd /boot
+ls -l
+sudo mkdir /media/isodir
+ls -l /media/isodir/
+sudo mount -o loop my_test.iso /media/isodir/
+ls -l /media/isodir
+
+-파일 압축 및 해제-
+xz FILE
+xz -d FILE.xz //해제
+xz -l FILE.xz
+xz -k FILE
+
+bzip2 FILE
+bzip2 -d FILE.bz2
+bzip2 -k FILE
+
+gzip FILE 
+gzip -d FILE.gz
+gzip -k FILE
+
+zip CMPFILE.zip FILE
+unzip CMPFILE.zip
+-파일 묶기 및 풀기-
+tar cvf my.tar services protocol //묶기
+tar tvf my.tar //tar 아카이브 내용확인가능 tar풀기전에 미이 아카이브 내용 확인
+tar xvf my.tar// 푼다
+tar xvf my.tar -C ~/Documents/ //경로에 푼다
+xz my.tar //묵은파일 압축
+tar Jcvf my.tar.xz ~/etc //묶고 압축
+tar zcvf my.tar.gz ~/etc
+tar jcvf my.tar.bz2 ~/etc
+
+-프로세스 관리-
+커널
+프로세스 스케줄링
+포그라운드 프로세스
+백그라운드 프로세스(서비스, 데몬)
+부모 프로세스
+자식 프로세스
+좀비 프로세스
+
+-프로세스 명령어-
+ps
+-e //전체
+-ef //전체 자세히
+
+top //메모리사용량 cpu점유율등.....
+
+kill ???//프로세스 종료, ???top에서 pid확인하고 입력
+kill -9 ???? //좋진않음 최후의 수단ㅜㅜ
+
+jobs //실행확인 아래에 숫자입력하여 다양하게 처리
+fg %1 //포그라운드
+bg %3 //백그라운드
+kill %2 //종료가능
+
+systemctl
+sudo apt install openssh-server
+systemctl -t service
+sudo apt install openssh-server
+systemctl -t service //service로 분류해 검색
+systemctl status ssh.service //상태 확인 
+systemctl stop ssh.service //서비스 중지
+systemctl start ssh.service //서비스시작
+systemctl restart ssh.service //서비스 재시작
+systemctl reload ssh.service //
+systemctl enable ssh.service //시스템부팅되면서 enable
+systemctl disable ssh.service
+systemctl isolate multi-user.target
+systemctl isolate graphical.target 
+
+ssh moon@192.168.0.140 //원격접속
+w //확인
+
+//윈도우는 xshell다운 받고 원격 접속
+
+scp services moon@192.168.0.140: //원격접속해 services파일 카피
+sftp 192.168.0.140 //서비스 이용해서 put으로 원격카피 원격 파일 업로드 가능
+
+vi 01-network-manager-all.yaml //방법중하나 알고만 패스
+
+ip a //ip address
+
+nmcli
+g[eneral]
+n[etworking]
+n off
+n on
+d[vices]
+c[onenection]
+c down '유선연결 1'
+c s '유선연결 1'
+nmcli c up '유선 연결 1'
+c mod '유선 연결 1' ipv4.method auto
+c down '유선 연결 1'
+c up '유선 연결 1'
+d del '유선 연결 1'
+
+sudo apt install net-tools
+
+port // IP 내에서 애플리케이션 상호 구분(프로세스 구분)을 위해 사용하는 번호이다.
+port번호 //ip주소가 가르키는 pc에 접속할수있는 통로(채널)을 의미
+ipaddress
+       나                         다른서버
+ 198.163.55.10       -x>       224.6.22.50
+ 198.163.55.10       -o>       224.6.22.50:22
+                                    >22는 서버에서 정보를 받기 위하여 서버의 지정 공간 입력
+                                       ex)세종종합청사에 중소기업 정보를 받고싶은데 포트넘버가 22이면 22입력
+
+shell //p 425~
+
+vim설정
+----------------------------------------------------------------------------------------------
+변수
+testval=Hello //공백없어야함 값에도 공백x ""안에 입력 ,모두 문자열로인식
+--------------------------------------------------------------------------------------------------
+python
+설치
+vi .bashrc
+에서 alias python='python3' 변수 만들고
+python hello.py //변수 이용해서 실행
+--------------------------------------------------------------------------------------------------
+JAVA환경변수
+which java -> /usr/bin/java //java경로
+readlink -f /usr/bin/java //경로복사
+cd /etc/profile.d
+sudo vi java.sh
+java.sh안에 export JAVA_HOME=복사한경로  적고 저장 하고 리부트
+echo $JAVA_HOME //확인
+
+
+-telnet------------------------------------------------------------------------------------------
+sudo apt install xinetd telnetd
+
+cd /etc/xinetd.d/
+
+sudo vi telnet
+
+man 5 xinetd.conf //매뉴얼 확인 하고 사용
+
+service telnet
+{
+disable = no
+flags = REUSE
+socket_type = stream
+wait = no
+user = root
+server = /usr/sbin/in.telnetd
+log_on_failure += USERID
+}
+
+systemctrl restart xinetd.service//재시작
+
+systemctrl status xinetd.service//확인
+
+다른 기기로 접속
+
+netstat -at//확인
+netstat -atn
+
+------------------------------------------------------------------------
+MySQL서버 설치
+sudo apt install mysql-server
+systemctl status mysql.service //상태 확인
+sudo mysql //실행
+create user 'koko'@'%' identified by '1234';
+create database abc;
+grant all privileges on bulletin.* to 'koko'@'%';
+show grants for 'koko'@'%'
+exit
+mysql -u koko -p//접속
+
+work bench -> ip,이름 써서 하나만들고
+cd /etc/mysql/mysql.conf.d/
+sudo vi mysql.cnf
+bind-address...... //여기 #로 주석처리
+systemctl restart mysql.service
+systemctl status mysql.service
+
+
+------------Apache--------------------------------------------------
+sudo apt install apache2
+systemctl status apache2.service
+cd /var/www/html/
+sudo mv index.html index.html.org
+sudo vi index.html 에서 작성후 
+인터넷에서  192.168.0.140(자신 ipaddress 적는다
+확인
+
+---------php ->apache -> mysql-------------------------------------------
+sudo apt install php php-mysql
+cd /var/www/html/
+sudo vi phpinfo.php
+<?php
+phpinfo()
+?>
+인터넷에 ip주소/phpinfo.php 확인
+
+cd /etc/php/7.4/apache2/
+
+sudo vi php.ini
+extention=mysqli찾아서 ;지우기
+systemctl status apache2.service
+cd /var/www/html/
+sudo vi phpmysql.php
+
+<?php
+$host = "192.168.0.140";
+$user = "koko";
+$pw = "1234";
+$dbName = "bulletin";
+$conn = new mysqli($host, $user, $pw, $dbName);
+
+if($conn) { echo "Connection established"."<br>"; }
+else { die('Could not connect: '.mysqli_error($conn));}
+
+$sql = "select * from user";
+$result = mysqli_query($conn, $sql);
+while($row = mysqli_fetch_array($result)){
+        echo $row['name']."-----".$row['profile']."<br>";
+}
+mysqli_close($conn);
+?>
+
+인터넷에 ip주소/phpmysql.php 확인
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

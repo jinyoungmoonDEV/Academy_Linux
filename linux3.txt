@@ -1,0 +1,105 @@
+groupadd /그룹생성
+-g 2033 team3 //team3 그룹아이디 2033
+
+groupdel
+
+groupmod
+
+gpasswd
+-r //비번삭제
+-a user01 team1 //그룹에 사용자 추가
+-d//유저삭제
+-A//관리자 등록
+-A '' team // team관리자 삭제
+
+newgrp team1 //그룹권한 받기 ->다른사용자가 잠시 그룹이용해야할떄
+
+usermod -G team2 user04
+usermod -G '' user04
+usermod -g team3 user05
+
+
+-usb mount-
+fidsk //파티션
+
+fdisk -l //인식된 블록디바이스 정보 보여준다
+lsblk -f //파일 시스템의 정보를 출력
+
+fdisk /dev/sdb //하드디스크 위치 작업
+mkfs.ext4 /dev/sdb1 //포멧 --> mke2fs /dev/sdb1 (mke2fs 는 mkfs.ext4의 심볼릭 링크)
+mount /dev/sdb1 /mnt/usb //마운트하기
+umount /mnt/usb //mount해제
+umount /dev/sdb2 //이것도 가능
+
+
+-sata mount-
+fdisk -l
+fdisk /dev/sdb
+mkfs.ext3 /dev/sdb1
+mkfs.ext4 /dev/sdb2
+mkdir disk1
+mkdir disk2
+cd /mnt
+cd disk1
+echo hello > hello.txt
+cd disk2
+echo hello > hello.txt
+mount /dev/sdb1 /mnt/disk1
+mount /dev/sdb2 /mnt/disk2
+
+sudo -i
+cd /etc
+vi fstab
+reboot
+
+-RAID- p351
+fdisk /dev/sdb// b~j
+n
+t
+fd
+p
+w
+apt install mdadm
+mdadm --create /dev/md9 --level=linear --raid-devices=2 /dev/sdb1 /dev/sdc1
+mdadm --detail --scan
+mkfs.ext4 /dev/md9
+mkdir /mnt/raidinear
+mount /dev/md0 /mnt/raid5
+
+mdadm --create /dev/md0 --level=0 --raid-devices=2 /dev/sdd1 /dev/sde1
+mdadm --detail --scan
+mkfs.ext4 /dev/md9
+mkdir /mnt/raidinear
+mount /dev/md5 /mnt/raid5
+
+mdadm --create /dev/md1 --level=1 --raid-devices=2 /dev/sdf1 /dev/sdg1
+mdadm --detail --scan
+mkfs.ext4 /dev/md1
+mkdir /mnt/raidinear
+mount /dev/md1 /mnt/raid1
+
+mdadm --create /dev/md5 --level=5 --raid-devices=3 /dev/sdh1 /dev/sdi1 /dev/sdj1
+mdadm --detail --scan
+mkfs.ext4 /dev/md5
+mkdir /mnt/raidinear
+mount /dev/md5 /mnt/raid5
+
+reboot
+vi /etc/fstab
+/dev/md/orange:9 /mnt/raidlinear ext4 defaults 0 0
+/dev/md/orange:0 /mnt/raid0 ext4 defaults 0 0
+/dev/md/orange:1 /mnt/raid1 ext4 defaults 0 0
+/dev/md/orange:5 /mnt/raid5 ext4 defaults 0 0
+.
+.
+or
+blkid -/dev/md127 //uuid체크
+UUID=??????? /mnt/raid... ext4 defaults 0 0
+..
+...
+
+-공유폴더-
+윈도우 폴더생성 
+virtualbox에 설정->공유폴더->추가
+리눅스 mnt 밑에share 생성
+mount -t vboxsf share /mnt/share

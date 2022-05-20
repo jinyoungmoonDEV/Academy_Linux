@@ -1,0 +1,115 @@
+sudo 
+apt
+
+man
+
+ln//하드
+-s//소프트
+
+
+gedit & //덱스트편집기
+
+nano
+
+https://velog.io/@zeesoo/Linux-vi-%ED%8E%B8%EC%A7%91%EA%B8%B0-%EC%82%AC%EC%9A%A9%EB%B2%95-%EB%B0%8F-%EB%AA%85%EB%A0%B9%EC%96%B4
+
+vi
+(sudo apt install vim)
+vim
+:q
+:q!
+:w
+:set nu//ln
+
+-vim명령모드-
+j,k,l,h //이동
+ctrl f,b //페이지 단위로 이동
+ctrl d,u //반페이지 단위로 이동
+ctrl y,e //스크롤
+G //맨아레
+gg //맨위
+numG //num줄로 바로 이동
+$ //해당라인 텍스트  마지막으로 이동
+^ //해당라인 텍스트  앞으로 이동
+0 //해당라인 제일 처음으로 이동
+w,b //단어 단위 앞 으로 이동
+e //단어단위 뒤로 이동
+D //라인에 커서 말고 전부 잘라내기
+d0//커서 앞 부터 라인 앞 까지 잘라내기
+dd //라인 잘라내디
+u //되돌리기
+Y,yy//복사
+numY//num만큼 줄 복사
+p,P// 붙여넣기
+/abc //검색
+?abc //검색(/ 하고 방향이 다름)
+N,n //검색 단어 이동하면서 찾기
+*//커서 문자 찾기 (n으로 이동)
+
+-vim line모드-
+:num //num번쨰로 이동
+:numd //num쨰줄 삭제
+:num1,num2d //num1에서 num2까지 삭제
+:.,+numd //현재커서 위치부터 num번쨰 줄까지 삭제
+:%d //전체삭제
+:e! //저장하고 계속편집
+:set nu //라인넘버 생성
+
+-vim 입력모드-
+a//커서 뒤 부터 입력
+i//커서 앞 부터 입력
+o //아래로 한줄 공백만들고 입력
+s //한문자없어지고 입력
+A //커서줄 맨뒤 부터
+I //커서줄 맨앞에서 부터
+S //커서줄 없어지고 입력
+O //위로 한줄 공백만들고 입력
+nums
+r //대체
+cw //입력모드 바로 전환
+numcw
+x //단어단위로 잘라내기
+numx
+p //커서에서 단어단위로 붙여넣기
+
+-치환-
+:s/???/???/
+:%s/???/???/
+:%s/???/???/g   //g를 사용하면 같은줄 같은 문자열 치환
+:1,$s/???/???/g
+:1,100s/???/???/g
+:1,$s/???/???/gc   //c는 물어본다
+
+
+-사용자 계정 관리-
+useradd //사용자 추가
+-m //쉘 설정까지 한번에 설정
+-s
+
+adduser
+
+passwd
+
+chsh//로그인 쉘 변경
+
+userdel//사용자 삭제
+-d //디렉토리까지 삭제
+
+deluser
+
+usermod
+-d /home/tom -l james user02
+-u
+
+-터미널상에서 계정 생성-//노가다
+root로그인->useradd로 생성-> passwd로 생성->/home 디렉토리 이동-> user디렉토리 생성-> su - user로 로그인->chsh를 /bin/bash로 설정->exit-> tail /etc/passwd로 확인-> 홈 디렉토리에서 chown user:user user로 소유자 변경
+
+chage 
+
+-문제
+usermod -u 2003 master
+usermod -m -d /workspace_06 master
+tail /etc/passwd
+grep master /etc/passwd
+usermod -l manager master
+grep manager /etc/passwd
